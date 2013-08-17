@@ -7,6 +7,7 @@
 //
 
 #import "SBRAppDelegate.h"
+#import "SBRCallbackAction.h"
 
 #import "SBRViewController.h"
 
@@ -20,6 +21,25 @@
   self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;
+  
+  [[SBRCallbackParser sharedParser] setURLScheme:@"podio"];
+  
+  SBRCallbackAction *action = [SBRCallbackAction actionWithURLScheme:@"skitch" name:@"draw"];
+  [action registerWithParser:[SBRCallbackParser sharedParser] successBlock:^(NSDictionary *parameters) {
+    NSLog(@"Finished drawing");
+  }];
+  
+  [action trigger];
+  
+  [[SBRCallbackParser sharedParser] addHandlerForActionName:@"myAction" handlerBlock:^BOOL(NSDictionary *parameters, NSString *source, SBRCallbackActionHandlerCompletionBlock completion) {
+    NSLog(@"Action was called");
+    
+    return YES;
+  }];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+  return [[SBRCallbackParser sharedParser] handleURL:url];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

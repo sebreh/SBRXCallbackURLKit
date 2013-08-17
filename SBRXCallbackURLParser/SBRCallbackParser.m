@@ -5,19 +5,34 @@
 //  Copyright (c) 2013 Sebastian Rehnby. All rights reserved.
 //
 
-#import "SBRXCallbackURLParser.h"
+#import "SBRCallbackParser.h"
 #import "NSDictionary+SBRXCallbackURLParser.h"
 #import "NSURL+SBRXCallbackURLParser.h"
 #import "NSString+SBRXCallbackURLParser.h"
+#import "NSError+SBRCallbackURLParser.h"
 
-@interface SBRXCallbackURLParser ()
+@interface SBRCallbackParser ()
 
-@property (nonatomic, copy) NSString *URLScheme;
-@property (nonatomic, strong) NSMutableDictionary *actions;
+@property (nonatomic, strong) NSMutableDictionary *handlers;
 
 @end
 
-@implementation SBRXCallbackURLParser
+@implementation SBRCallbackParser
+
++ (instancetype)sharedParser {
+  static id sharedParser;
+  static dispatch_once_t once;
+  
+  dispatch_once(&once, ^{
+    sharedParser = [[self alloc] init];
+  });
+  
+  return sharedParser;
+}
+
+- (id)init {
+  return [self initWithURLScheme:nil];
+}
 
 - (instancetype)initWithURLScheme:(NSString *)URLScheme {
   self = [super init];
@@ -36,11 +51,11 @@
 - (NSString *)description {
   NSMutableArray *actionDescriptions = [NSMutableArray new];
   
-  [self.actions enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+  [self.handlers enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
     NSString *actionName = key;
-    SBRXCallbackURLAction *action = obj;
+    SBRCallbackActionHandler *action = obj;
     
-    NSString *actionDescription = [NSString stringWithFormat:@"%@ = %@://x-callback-url/%@", actionName, self.URLScheme, action.name];
+    NSString *actionDescription = [NSString stringWithFormat:@"%@ = %@://x-callback-url/%@", actionName, self.URLScheme, action.actionName];
     [actionDescriptions addObject:actionDescription];
   }];
   
@@ -49,34 +64,60 @@
 
 #pragma mark - Properties
 
-- (NSMutableDictionary *)actions {
-  if (!_actions) {
-    _actions = [NSMutableDictionary new];
+- (NSMutableDictionary *)handlers {
+  if (!_handlers) {
+    _handlers = [NSMutableDictionary new];
   }
   
-  return _actions;
+  return _handlers;
 }
 
 #pragma mark - Impl
 
-- (void)addAction:(SBRXCallbackURLAction *)action {
-  [self.actions setObject:action forKey:action.name];
+- (BOOL)verifyHasURLScheme {
+  if (!self.URLScheme) {
+    @throw [NSError sbr_errorWithCode:SBRXCallbackURLErrorCodeMissingParameter message:@"No URL scheme set for parser %p. Set the URLScheme property of the parser before calling handleURL:."];
+    return NO;
+  }
+  
+  return YES;
 }
 
-- (void)addActionWithName:(NSString *)actionName handlerBlock:(SBRXCallbackURLActionHandlerBlock)handlerBlock {
-  [self addActionWithName:actionName requiredParameters:nil handlerBlock:handlerBlock];
+- (void)addActionHandler:(SBRCallbackActionHandler *)handler {
+  [self.handlers setObject:handler forKey:handler.actionName];
 }
 
-- (void)addActionWithName:(NSString *)actionName requiredParameters:(NSArray *)requiredParameters handlerBlock:(SBRXCallbackURLActionHandlerBlock)handlerBlock {
-  SBRXCallbackURLAction *action = [SBRXCallbackURLAction actionWithName:actionName
-                                                   requiredParameters:requiredParameters
-                                                         handlerBlock:handlerBlock];
-  [self addAction:action];
+- (SBRCallbackActionHandler *)addHandlerForActionName:(NSString *)actionName handlerBlock:(SBRCallbackActionHandlerBlock)handlerBlock {
+  return [self addHandlerForActionName:actionName requiredParameters:nil handlerBlock:handlerBlock];
+}
+
+- (SBRCallbackActionHandler *)addHandlerForActionName:(NSString *)actionName requiredParameters:(NSArray *)requiredParameters handlerBlock:(SBRCallbackActionHandlerBlock)handlerBlock {
+  SBRCallbackActionHandler *handler = [SBRCallbackActionHandler handlerForActionName:actionName
+                                                                  requiredParameters:requiredParameters
+                                                                        handlerBlock:handlerBlock];
+  [self addActionHandler:handler];
+  
+  return handler;
+}
+
+- (NSURL *)callbackURLForActionHandler:(SBRCallbackActionHandler *)actionHandler {
+  if (![self verifyHasURLScheme]) {
+    return nil;
+  }
+  
+  NSString *URLString = [NSString stringWithFormat:@"%@://x-callback-url/%@", self.URLScheme, actionHandler.actionName];
+  NSURL *url = [NSURL URLWithString:URLString];
+  
+  return url;
 }
 
 - (BOOL)handleURL:(NSURL *)URL {
-  SBRXCallbackURLAction *action = [self actionForURL:URL];
-  if (!action) {
+  if (![self verifyHasURLScheme]) {
+    return NO;
+  }
+  
+  SBRCallbackActionHandler *handler = [self handlerForURL:URL];
+  if (!handler) {
     return NO;
   }
   
@@ -84,16 +125,16 @@
   NSDictionary *userParameters = [self userParametersFromURL:URL];
   
   // Look for missing parameters
-  NSArray *missingParameters = [self missingParametersInUserParameters:userParameters requiredParameters:action.requiredParameters];
+  NSArray *missingParameters = [self missingParametersInUserParameters:userParameters requiredParameters:handler.requiredParameters];
   if ([missingParameters count] > 0) {
     NSString *message = [NSString stringWithFormat:@"Missing parameters %@", [missingParameters componentsJoinedByString:@"m"]];
-    [self callErrorCallbackInXParameters:xParameters code:SBRXCallbackURLParserErrorMissingParameter message:message];
+    [self callErrorCallbackInXParameters:xParameters code:SBRCallbackParserErrorMissingParameter message:message];
     return NO;
   }
   
   // Call handler
-  __weak SBRXCallbackURLParser *weakSelf = self;
-  SBRXCallbackURLActionCompletionBlock completion = ^(NSDictionary *successParameters, NSError *error, BOOL cancelled) {
+  __weak SBRCallbackParser *weakSelf = self;
+  SBRCallbackActionHandlerCompletionBlock completion = ^(NSDictionary *successParameters, NSError *error, BOOL cancelled) {
     [weakSelf performCallbacksInXParameters:xParameters successParameters:successParameters error:error cancelled:cancelled];
   };
   
@@ -103,14 +144,18 @@
   // the app requesting the action.
   NSString *xSource = xParameters[@"x-source"];
   
-  BOOL handled = action.handlerBlock(userParameters, xSource, completion);
+  BOOL handled = handler.handlerBlock(userParameters, xSource, completion);
   
   return handled;
 }
 
 #pragma mark - Helpers
 
-- (SBRXCallbackURLAction *)actionForURL:(NSURL *)URL {
+- (SBRCallbackActionHandler *)handlerForURL:(NSURL *)URL {
+  if (![self verifyHasURLScheme]) {
+    return nil;
+  }
+  
   if (![URL.scheme isEqualToString:self.URLScheme] || ![URL.host isEqualToString:@"x-callback-url"]) {
     return nil;
   }
@@ -120,16 +165,16 @@
     return nil;
   }
   
-  SBRXCallbackURLAction *action = [self.actions objectForKey:actionName];
-  if (!action) {
+  SBRCallbackActionHandler *handler = [self.handlers objectForKey:actionName];
+  if (!handler) {
     return nil;
   }
   
-  if (!action.handlerBlock) {
+  if (!handler.handlerBlock) {
     return nil;
   }
   
-  return action;
+  return handler;
 }
 
 - (NSDictionary *)xParametersFromURL:(NSURL *)URL {

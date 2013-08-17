@@ -6,15 +6,15 @@
 //  Copyright (c) 2013 Sebastian Rehnby. All rights reserved.
 //
 
-#import "SBRXCallbackURLParserMockDelegate.h"
+#import "SBRCallbackParserMockDelegate.h"
 
-@interface SBRXCallbackURLParserMockDelegate ()
+@interface SBRCallbackParserMockDelegate ()
 
 @property (nonatomic, strong) NSMutableArray *callbacks;
 
 @end
 
-@implementation SBRXCallbackURLParserMockDelegate
+@implementation SBRCallbackParserMockDelegate
 
 #pragma mark - Properties
 
@@ -34,7 +34,7 @@
 
 #pragma mark - SBRXCallbackURLParserDelegate
 
-- (void)xCallbackURLParser:(SBRXCallbackURLParser *)parser shouldOpenSourceCallbackURL:(NSURL *)callbackURL {
+- (void)xCallbackURLParser:(SBRCallbackParser *)parser shouldOpenSourceCallbackURL:(NSURL *)callbackURL {
   [self.callbacks addObject:[callbackURL absoluteString]];
 }
 

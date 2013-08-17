@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SBRXCallbackURLParser.h"
+#import "SBRCallbackParser.h"
 
-@interface SBRXCallbackURLParserMockDelegate : NSObject <SBRXCallbackURLParserDelegate>
+@interface SBRCallbackParserMockDelegate : NSObject <SBRCallbackParserDelegate>
 
 - (BOOL)wasCallbackURLStringCalled:(NSString *)URLString;
 

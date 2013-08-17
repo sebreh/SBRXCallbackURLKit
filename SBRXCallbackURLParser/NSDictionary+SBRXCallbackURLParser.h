@@ -12,4 +12,8 @@
 
 - (NSDictionary *)sbr_dictionaryFromKeysPassingTest:(BOOL (^)(id key))block;
 
+- (NSDictionary *)sbr_dictionaryWithURLEncodedValues;
+
+- (NSString *)sbr_queryStringFromKeysAndValues;
+
 @end
