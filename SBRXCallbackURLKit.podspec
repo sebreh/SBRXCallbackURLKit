@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name         = "SBRXCallbackURLKit"
   s.version      = "1.0.0"
-  s.summary      = "Dead simple library to add x-callback-url support to your app."
+  s.summary      = "Simple library that makes it easy to add x-callback-url support to your app."
   s.homepage     = "https://github.com/sebreh/SBRXCallbackURLKit"
   s.license      = 'MIT'
   s.author       = { "Sebastian Rehnby" => "sebastian@rehnby.com" }
