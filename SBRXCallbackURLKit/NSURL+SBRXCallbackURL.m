@@ -1,15 +1,15 @@
 //
-//  NSURL+SBRXCallbackURLParser.m
+//  NSURL+SBRXCallbackURL.m
 //  XCallbackURLParserDemo
 //
 //  Created by Sebastian Rehnby on 8/8/13.
 //  Copyright (c) 2013 Sebastian Rehnby. All rights reserved.
 //
 
-#import "NSURL+SBRXCallbackURLParser.h"
-#import "NSString+SBRXCallbackURLParser.h"
+#import "NSURL+SBRXCallbackURL.h"
+#import "NSString+SBRXCallbackURL.h"
 
-@implementation NSURL (SBRXCallbackURLParser)
+@implementation NSURL (SBRXCallbackURL)
 
 - (NSDictionary *)sbr_queryParameters {
   NSArray *chunks = [[self query] componentsSeparatedByString:@"&"];

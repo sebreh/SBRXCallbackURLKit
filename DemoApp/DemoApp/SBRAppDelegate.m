@@ -22,9 +22,9 @@
     [self.window makeKeyAndVisible];
     return YES;
   
-  [[SBRCallbackParser sharedParser] setURLScheme:@"podio"];
+  [[SBRCallbackParser sharedParser] setURLScheme:@"demoapp"];
   
-  SBRCallbackAction *action = [SBRCallbackAction actionWithURLScheme:@"skitch" name:@"draw"];
+  SBRCallbackAction *action = [SBRCallbackAction actionWithURLScheme:@"otherapp" name:@"drawSomething"];
   [action registerWithParser:[SBRCallbackParser sharedParser] successBlock:^(NSDictionary *parameters) {
     NSLog(@"Finished drawing");
   }];

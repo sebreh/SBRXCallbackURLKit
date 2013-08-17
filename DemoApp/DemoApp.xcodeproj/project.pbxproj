@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		50154FD417BF63E700D2F24D /* NSError+SBRCallbackURLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 50154FD317BF63E700D2F24D /* NSError+SBRCallbackURLParser.m */; };
+		50154FD417BF63E700D2F24D /* NSError+SBRXCallbackURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 50154FD317BF63E700D2F24D /* NSError+SBRXCallbackURL.m */; };
+		50154FD817BF716B00D2F24D /* SBRXCallbackURLKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50154FD517BF716B00D2F24D /* SBRXCallbackURLKitTests.m */; };
+		50154FD917BF716B00D2F24D /* SBRCallbackParserMockDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 50154FD717BF716B00D2F24D /* SBRCallbackParserMockDelegate.m */; };
 		5065636317B40AB7002DCE45 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5065636217B40AB7002DCE45 /* UIKit.framework */; };
 		5065636517B40AB7002DCE45 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5065636417B40AB7002DCE45 /* Foundation.framework */; };
 		5065636717B40AB7002DCE45 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5065636617B40AB7002DCE45 /* CoreGraphics.framework */; };
@@ -23,13 +25,11 @@
 		5065638817B40AB8002DCE45 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5065636217B40AB7002DCE45 /* UIKit.framework */; };
 		5065638917B40AB8002DCE45 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5065636417B40AB7002DCE45 /* Foundation.framework */; };
 		5065639117B40AB8002DCE45 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5065638F17B40AB8002DCE45 /* InfoPlist.strings */; };
-		506563A817B40B4A002DCE45 /* NSDictionary+SBRXCallbackURLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5065639F17B40B4A002DCE45 /* NSDictionary+SBRXCallbackURLParser.m */; };
-		506563A917B40B4A002DCE45 /* NSString+SBRXCallbackURLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 506563A117B40B4A002DCE45 /* NSString+SBRXCallbackURLParser.m */; };
-		506563AA17B40B4A002DCE45 /* NSURL+SBRXCallbackURLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 506563A317B40B4A002DCE45 /* NSURL+SBRXCallbackURLParser.m */; };
+		506563A817B40B4A002DCE45 /* NSDictionary+SBRXCallbackURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 5065639F17B40B4A002DCE45 /* NSDictionary+SBRXCallbackURL.m */; };
+		506563A917B40B4A002DCE45 /* NSString+SBRXCallbackURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 506563A117B40B4A002DCE45 /* NSString+SBRXCallbackURL.m */; };
+		506563AA17B40B4A002DCE45 /* NSURL+SBRXCallbackURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 506563A317B40B4A002DCE45 /* NSURL+SBRXCallbackURL.m */; };
 		506563AB17B40B4A002DCE45 /* SBRCallbackActionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 506563A517B40B4A002DCE45 /* SBRCallbackActionHandler.m */; };
 		506563AC17B40B4A002DCE45 /* SBRCallbackParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 506563A717B40B4A002DCE45 /* SBRCallbackParser.m */; };
-		506563AE17B40BA7002DCE45 /* SBRCallbackParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 506563AD17B40BA7002DCE45 /* SBRCallbackParserTests.m */; };
-		506563B317B40C90002DCE45 /* SBRCallbackParserMockDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 506563B217B40C90002DCE45 /* SBRCallbackParserMockDelegate.m */; };
 		506563BA17B44DAD002DCE45 /* SBRCallbackAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 506563B917B44DAC002DCE45 /* SBRCallbackAction.m */; };
 /* End PBXBuildFile section */
 
@@ -44,8 +44,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		50154FD217BF63E700D2F24D /* NSError+SBRCallbackURLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+SBRCallbackURLParser.h"; sourceTree = "<group>"; };
-		50154FD317BF63E700D2F24D /* NSError+SBRCallbackURLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+SBRCallbackURLParser.m"; sourceTree = "<group>"; };
+		50154FD217BF63E700D2F24D /* NSError+SBRXCallbackURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+SBRXCallbackURL.h"; sourceTree = "<group>"; };
+		50154FD317BF63E700D2F24D /* NSError+SBRXCallbackURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+SBRXCallbackURL.m"; sourceTree = "<group>"; };
+		50154FD517BF716B00D2F24D /* SBRXCallbackURLKitTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBRXCallbackURLKitTests.m; path = ../../SBRXCallbackURLKitTests/SBRXCallbackURLKitTests.m; sourceTree = "<group>"; };
+		50154FD617BF716B00D2F24D /* SBRCallbackParserMockDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBRCallbackParserMockDelegate.h; path = ../../SBRXCallbackURLKitTests/SBRCallbackParserMockDelegate.h; sourceTree = "<group>"; };
+		50154FD717BF716B00D2F24D /* SBRCallbackParserMockDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBRCallbackParserMockDelegate.m; path = ../../SBRXCallbackURLKitTests/SBRCallbackParserMockDelegate.m; sourceTree = "<group>"; };
 		5065635F17B40AB7002DCE45 /* DemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5065636217B40AB7002DCE45 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5065636417B40AB7002DCE45 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -66,19 +69,16 @@
 		5065638617B40AB8002DCE45 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		5065638E17B40AB8002DCE45 /* DemoAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DemoAppTests-Info.plist"; sourceTree = "<group>"; };
 		5065639017B40AB8002DCE45 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		5065639E17B40B4A002DCE45 /* NSDictionary+SBRXCallbackURLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+SBRXCallbackURLParser.h"; sourceTree = "<group>"; };
-		5065639F17B40B4A002DCE45 /* NSDictionary+SBRXCallbackURLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+SBRXCallbackURLParser.m"; sourceTree = "<group>"; };
-		506563A017B40B4A002DCE45 /* NSString+SBRXCallbackURLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBRXCallbackURLParser.h"; sourceTree = "<group>"; };
-		506563A117B40B4A002DCE45 /* NSString+SBRXCallbackURLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBRXCallbackURLParser.m"; sourceTree = "<group>"; };
-		506563A217B40B4A002DCE45 /* NSURL+SBRXCallbackURLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+SBRXCallbackURLParser.h"; sourceTree = "<group>"; };
-		506563A317B40B4A002DCE45 /* NSURL+SBRXCallbackURLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+SBRXCallbackURLParser.m"; sourceTree = "<group>"; };
+		5065639E17B40B4A002DCE45 /* NSDictionary+SBRXCallbackURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+SBRXCallbackURL.h"; sourceTree = "<group>"; };
+		5065639F17B40B4A002DCE45 /* NSDictionary+SBRXCallbackURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+SBRXCallbackURL.m"; sourceTree = "<group>"; };
+		506563A017B40B4A002DCE45 /* NSString+SBRXCallbackURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBRXCallbackURL.h"; sourceTree = "<group>"; };
+		506563A117B40B4A002DCE45 /* NSString+SBRXCallbackURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBRXCallbackURL.m"; sourceTree = "<group>"; };
+		506563A217B40B4A002DCE45 /* NSURL+SBRXCallbackURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+SBRXCallbackURL.h"; sourceTree = "<group>"; };
+		506563A317B40B4A002DCE45 /* NSURL+SBRXCallbackURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+SBRXCallbackURL.m"; sourceTree = "<group>"; };
 		506563A417B40B4A002DCE45 /* SBRCallbackActionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBRCallbackActionHandler.h; sourceTree = "<group>"; };
 		506563A517B40B4A002DCE45 /* SBRCallbackActionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBRCallbackActionHandler.m; sourceTree = "<group>"; };
 		506563A617B40B4A002DCE45 /* SBRCallbackParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBRCallbackParser.h; sourceTree = "<group>"; };
 		506563A717B40B4A002DCE45 /* SBRCallbackParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBRCallbackParser.m; sourceTree = "<group>"; };
-		506563AD17B40BA7002DCE45 /* SBRCallbackParserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBRCallbackParserTests.m; path = ../../SBRXCallbackURLParserTests/SBRCallbackParserTests.m; sourceTree = "<group>"; };
-		506563B117B40C90002DCE45 /* SBRCallbackParserMockDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBRCallbackParserMockDelegate.h; path = ../../SBRXCallbackURLParserTests/SBRCallbackParserMockDelegate.h; sourceTree = "<group>"; };
-		506563B217B40C90002DCE45 /* SBRCallbackParserMockDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBRCallbackParserMockDelegate.m; path = ../../SBRXCallbackURLParserTests/SBRCallbackParserMockDelegate.m; sourceTree = "<group>"; };
 		506563B817B44DAC002DCE45 /* SBRCallbackAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBRCallbackAction.h; sourceTree = "<group>"; };
 		506563B917B44DAC002DCE45 /* SBRCallbackAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBRCallbackAction.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -110,7 +110,7 @@
 		5065635617B40AB7002DCE45 = {
 			isa = PBXGroup;
 			children = (
-				5065639D17B40B4A002DCE45 /* SBRXCallbackURLParser */,
+				5065639D17B40B4A002DCE45 /* SBRXCallbackURLKit */,
 				5065636817B40AB7002DCE45 /* DemoApp */,
 				5065638C17B40AB8002DCE45 /* DemoAppTests */,
 				5065636117B40AB7002DCE45 /* Frameworks */,
@@ -168,9 +168,9 @@
 		5065638C17B40AB8002DCE45 /* DemoAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				506563AD17B40BA7002DCE45 /* SBRCallbackParserTests.m */,
-				506563B117B40C90002DCE45 /* SBRCallbackParserMockDelegate.h */,
-				506563B217B40C90002DCE45 /* SBRCallbackParserMockDelegate.m */,
+				50154FD517BF716B00D2F24D /* SBRXCallbackURLKitTests.m */,
+				50154FD617BF716B00D2F24D /* SBRCallbackParserMockDelegate.h */,
+				50154FD717BF716B00D2F24D /* SBRCallbackParserMockDelegate.m */,
 				5065638D17B40AB8002DCE45 /* Supporting Files */,
 			);
 			path = DemoAppTests;
@@ -185,7 +185,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		5065639D17B40B4A002DCE45 /* SBRXCallbackURLParser */ = {
+		5065639D17B40B4A002DCE45 /* SBRXCallbackURLKit */ = {
 			isa = PBXGroup;
 			children = (
 				506563B817B44DAC002DCE45 /* SBRCallbackAction.h */,
@@ -194,17 +194,17 @@
 				506563A517B40B4A002DCE45 /* SBRCallbackActionHandler.m */,
 				506563A617B40B4A002DCE45 /* SBRCallbackParser.h */,
 				506563A717B40B4A002DCE45 /* SBRCallbackParser.m */,
-				5065639E17B40B4A002DCE45 /* NSDictionary+SBRXCallbackURLParser.h */,
-				5065639F17B40B4A002DCE45 /* NSDictionary+SBRXCallbackURLParser.m */,
-				506563A017B40B4A002DCE45 /* NSString+SBRXCallbackURLParser.h */,
-				506563A117B40B4A002DCE45 /* NSString+SBRXCallbackURLParser.m */,
-				506563A217B40B4A002DCE45 /* NSURL+SBRXCallbackURLParser.h */,
-				506563A317B40B4A002DCE45 /* NSURL+SBRXCallbackURLParser.m */,
-				50154FD217BF63E700D2F24D /* NSError+SBRCallbackURLParser.h */,
-				50154FD317BF63E700D2F24D /* NSError+SBRCallbackURLParser.m */,
+				5065639E17B40B4A002DCE45 /* NSDictionary+SBRXCallbackURL.h */,
+				5065639F17B40B4A002DCE45 /* NSDictionary+SBRXCallbackURL.m */,
+				506563A017B40B4A002DCE45 /* NSString+SBRXCallbackURL.h */,
+				506563A117B40B4A002DCE45 /* NSString+SBRXCallbackURL.m */,
+				506563A217B40B4A002DCE45 /* NSURL+SBRXCallbackURL.h */,
+				506563A317B40B4A002DCE45 /* NSURL+SBRXCallbackURL.m */,
+				50154FD217BF63E700D2F24D /* NSError+SBRXCallbackURL.h */,
+				50154FD317BF63E700D2F24D /* NSError+SBRXCallbackURL.m */,
 			);
-			name = SBRXCallbackURLParser;
-			path = ../SBRXCallbackURLParser;
+			name = SBRXCallbackURLKit;
+			path = ../SBRXCallbackURLKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,13 +321,13 @@
 				5065636F17B40AB7002DCE45 /* main.m in Sources */,
 				5065637317B40AB7002DCE45 /* SBRAppDelegate.m in Sources */,
 				5065637C17B40AB7002DCE45 /* SBRViewController.m in Sources */,
-				506563A817B40B4A002DCE45 /* NSDictionary+SBRXCallbackURLParser.m in Sources */,
-				506563A917B40B4A002DCE45 /* NSString+SBRXCallbackURLParser.m in Sources */,
-				506563AA17B40B4A002DCE45 /* NSURL+SBRXCallbackURLParser.m in Sources */,
+				506563A817B40B4A002DCE45 /* NSDictionary+SBRXCallbackURL.m in Sources */,
+				506563A917B40B4A002DCE45 /* NSString+SBRXCallbackURL.m in Sources */,
+				506563AA17B40B4A002DCE45 /* NSURL+SBRXCallbackURL.m in Sources */,
 				506563AB17B40B4A002DCE45 /* SBRCallbackActionHandler.m in Sources */,
 				506563AC17B40B4A002DCE45 /* SBRCallbackParser.m in Sources */,
 				506563BA17B44DAD002DCE45 /* SBRCallbackAction.m in Sources */,
-				50154FD417BF63E700D2F24D /* NSError+SBRCallbackURLParser.m in Sources */,
+				50154FD417BF63E700D2F24D /* NSError+SBRXCallbackURL.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,8 +335,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				506563AE17B40BA7002DCE45 /* SBRCallbackParserTests.m in Sources */,
-				506563B317B40C90002DCE45 /* SBRCallbackParserMockDelegate.m in Sources */,
+				50154FD817BF716B00D2F24D /* SBRXCallbackURLKitTests.m in Sources */,
+				50154FD917BF716B00D2F24D /* SBRCallbackParserMockDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

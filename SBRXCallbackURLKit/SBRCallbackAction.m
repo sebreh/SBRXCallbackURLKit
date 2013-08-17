@@ -7,9 +7,9 @@
 //
 
 #import "SBRCallbackAction.h"
-#import "NSDictionary+SBRXCallbackURLParser.h"
-#import "NSError+SBRCallbackURLParser.h"
-#import "NSString+SBRXCallbackURLParser.h"
+#import "NSDictionary+SBRXCallbackURL.h"
+#import "NSError+SBRXCallbackURL.h"
+#import "NSString+SBRXCallbackURL.h"
 
 @interface SBRCallbackAction ()
 

@@ -1,14 +1,14 @@
 //
-//  NSString+SBRXCallbackURLParser.m
+//  NSString+SBRXCallbackURL.m
 //  XCallbackURLParserDemo
 //
 //  Created by Sebastian Rehnby on 8/8/13.
 //  Copyright (c) 2013 Sebastian Rehnby. All rights reserved.
 //
 
-#import "NSString+SBRXCallbackURLParser.h"
+#import "NSString+SBRXCallbackURL.h"
 
-@implementation NSString (SBRXCallbackURLParser)
+@implementation NSString (SBRXCallbackURL)
 
 - (NSString *)sbr_URLEncode {
   NSString *encodedString = (__bridge_transfer NSString *) CFURLCreateStringByAddingPercentEscapes(NULL,

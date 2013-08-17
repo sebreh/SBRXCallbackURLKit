@@ -6,10 +6,10 @@
 //
 
 #import "SBRCallbackParser.h"
-#import "NSDictionary+SBRXCallbackURLParser.h"
-#import "NSURL+SBRXCallbackURLParser.h"
-#import "NSString+SBRXCallbackURLParser.h"
-#import "NSError+SBRCallbackURLParser.h"
+#import "NSDictionary+SBRXCallbackURL.h"
+#import "NSURL+SBRXCallbackURL.h"
+#import "NSString+SBRXCallbackURL.h"
+#import "NSError+SBRXCallbackURL.h"
 
 @interface SBRCallbackParser ()
 

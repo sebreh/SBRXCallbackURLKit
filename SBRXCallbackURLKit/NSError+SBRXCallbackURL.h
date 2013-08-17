@@ -1,5 +1,5 @@
 //
-//  NSError+SBRCallbackURLParser.h
+//  NSError+SBRXCallbackURL.h
 //  DemoApp
 //
 //  Created by Sebastian Rehnby on 8/17/13.
@@ -14,7 +14,7 @@ typedef NS_ENUM(NSInteger, SBRXCallbackURLErrorCode) {
 
 extern NSString * const SBRXCallbackURLErrorDomain;
 
-@interface NSError (SBRCallbackURLParser)
+@interface NSError (SBRXCallbackURL)
 
 + (NSError *)sbr_errorWithCode:(NSInteger)code message:(NSString *)message;
 

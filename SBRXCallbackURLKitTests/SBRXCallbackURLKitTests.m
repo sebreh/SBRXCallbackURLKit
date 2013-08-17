@@ -1,5 +1,5 @@
 //
-//  SBRXCallbackURLParserTests.m
+//  SBRXCallbackURLKitTests.m
 //
 //  Created by Sebastian Rehnby on 8/7/13.
 //  Copyright (c) 2013 Sebastian Rehnby. All rights reserved.
@@ -12,11 +12,11 @@
 
 static NSString * const kURLScheme = @"demoapp";
 
-@interface SBRCallbackParserTests : SenTestCase
+@interface SBRXCallbackURLKitTests : SenTestCase
 
 @end
 
-@implementation SBRCallbackParserTests
+@implementation SBRXCallbackURLKitTests
 
 #pragma mark - Parsing
 

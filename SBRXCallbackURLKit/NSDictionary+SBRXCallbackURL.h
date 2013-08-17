@@ -1,5 +1,5 @@
 //
-//  NSDictionary+SBRXCallbackURLParser.h
+//  NSDictionary+SBRXCallbackURL.h
 //  XCallbackURLParserDemo
 //
 //  Created by Sebastian Rehnby on 8/8/13.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSDictionary (SBRXCallbackURLParser)
+@interface NSDictionary (SBRXCallbackURL)
 
 - (NSDictionary *)sbr_dictionaryFromKeysPassingTest:(BOOL (^)(id key))block;
 

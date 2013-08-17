@@ -1,5 +1,5 @@
 //
-//  NSURL+SBRXCallbackURLParser.h
+//  NSURL+SBRXCallbackURL.h
 //  XCallbackURLParserDemo
 //
 //  Created by Sebastian Rehnby on 8/8/13.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSURL (SBRXCallbackURLParser)
+@interface NSURL (SBRXCallbackURL)
 
 - (NSDictionary *)sbr_queryParameters;
 
