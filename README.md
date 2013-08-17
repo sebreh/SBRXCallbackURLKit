@@ -14,11 +14,11 @@ To manually install it, just copy the files in the subfolder SBRXCallbackURLKit 
 
 ## Usage
 
-You can use SBRXCallbackURLKit to parse incoming x-callback-url actions, trigger actions in other apps, or use both in combination, allowing for two way interactions within apps.
+You can use SBRXCallbackURLKit to parse incoming x-callback-url actions, trigger actions in other apps, or use both in combination, allowing for two way interactions between apps.
 
 ### Parse incoming actions
 
-To support a new action in your app, you need to handle incoming URLs. For this you need an instance of SBRXCallbackParser. The easiest way is to use the shared instance of provided by its `sharedParser` method. If you use it this way, make sure to set your app's URL scheme in `application:didFinishLaunchingWithOptions:`:
+To support a new action in your app, you need to handle incoming URLs. For this you need an instance of SBRCallbackParser. The easiest way is to use the shared instance of provided by its `sharedParser` method. If you use it this way, make sure to set your app's URL scheme in `application:didFinishLaunchingWithOptions:`:
 
 	SBRCallbackParser *parser = [SBRCallbackParser sharedParser];
 	[parser setURLScheme:@"myapp"];
@@ -39,7 +39,7 @@ To support a new action in your app, you need to handle incoming URLs. For this 
 
 Then, in `application:openURL:sourceApplication:`, go ahead and use the parser to handle the incoming URLs.
 
-	[[SBRXCallbackParser sharedParser] handleURL:url];
+	[[SBRCallbackParser sharedParser] handleURL:url];
 	
 You can also choose to instantiate the parser in `application:openURL:sourceApplication:` and add the action handlers there. The advantage of using the shared parser is more evident when doing two-way communication using actions described in the next section.
 
@@ -54,11 +54,11 @@ To allow the other app to re-open your app when the action was successful, faile
 
 	SBRCallbackParser *parser = [SBRCallbackParser sharedParser];
 	[action registerWithParser:parser successBlock:^(NSDictionary *parameters) {
-		NSLog(@"Action successful in the other app");
+		// Action successful in the other app
 	} failureBlock:^(NSError *error) {
-		NSLog(@"Action failed in the other app");
+		// Action failed in the other app
 	} cancelBlock:^{
-		NSLog(@"Action cancelled the in other app");
+		// Action cancelled the in other app
 	}];
 
 This will add the appropriate action handlers to the parser and execute them when `handleURL:` is called.
