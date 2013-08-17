@@ -1,6 +1,6 @@
 # SBRXCallbackURLKit
 
-Simple library that makes it easy to add x-callback-url support to your app.
+Simple library that makes it easy to add [x-callback-url](http://x-callback-url.com/) support to your app.
 
 ## Installation
 
