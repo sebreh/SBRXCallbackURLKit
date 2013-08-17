@@ -75,9 +75,6 @@
           successBlock:(SBRCallbackActionSuccessBlock)successBlock
           failureBlock:(SBRCallbackActionFailureBlock)failureBlock
            cancelBlock:(SBRCallbackActionCancelBlock)cancelBlock {
-  
-  // TODO: Add callback parameters to action
-  
   if (successBlock) {
     NSString *successAction = [NSString stringWithFormat:@"%@-%@-success", self.URLScheme, self.name];
     
