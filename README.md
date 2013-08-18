@@ -4,7 +4,7 @@ Simple library that makes it easy to add [x-callback-url](http://x-callback-url.
 
 ## Installation
 
-The easiest way is to use CocoaPods. Add the following to your Podfile.
+The easiest way is to use CocoaPods. Add the following line to your Podfile:
 
 	pod 'SBRXCallbackURLKit'
 
@@ -16,9 +16,9 @@ To manually install it, just copy the files in the subfolder SBRXCallbackURLKit 
 
 You can use SBRXCallbackURLKit to parse incoming x-callback-url actions, trigger actions in other apps, or use both in combination, allowing for two way interactions between apps.
 
-### Parse incoming actions
+### Handle incoming actions
 
-To support a new action in your app, you need to handle incoming URLs. For this you need an instance of SBRCallbackParser. The easiest way is to use the shared instance of provided by its `sharedParser` method. If you use it this way, make sure to set your app's URL scheme in `application:didFinishLaunchingWithOptions:`:
+To support a new action in your app, you need to handle incoming URLs. For this you need an instance of SBRCallbackParser. The easiest way is to use the singleton provided by its `sharedParser` method. If you use it this way, make sure to set your app's URL scheme in `application:didFinishLaunchingWithOptions:`:
 
 	SBRCallbackParser *parser = [SBRCallbackParser sharedParser];
 	[parser setURLScheme:@"myapp"];
@@ -53,7 +53,7 @@ It's really easy to trigger an action in another app:
 To allow the other app to re-open your app when the action was successful, failed or cancelled you can easily register callbacks handlers with the shared parser described in the previous section:
 
 	SBRCallbackParser *parser = [SBRCallbackParser sharedParser];
-	[action registerWithParser:parser successBlock:^(NSDictionary *parameters) {
+	[action registerCallbacksWithParser:parser successBlock:^(NSDictionary *parameters) {
 		// Action successful in the other app
 	} failureBlock:^(NSError *error) {
 		// Action failed in the other app

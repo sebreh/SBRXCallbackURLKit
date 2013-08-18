@@ -25,15 +25,15 @@ typedef void (^SBRCallbackActionCancelBlock) (void);
 - (BOOL)canTrigger;
 - (BOOL)trigger;
 
-- (void)registerWithParser:(SBRCallbackParser *)parser successBlock:(SBRCallbackActionSuccessBlock)successBlock;
+- (void)registerCallbacksWithParser:(SBRCallbackParser *)parser successBlock:(SBRCallbackActionSuccessBlock)successBlock;
 
-- (void)registerWithParser:(SBRCallbackParser *)parser
-              successBlock:(SBRCallbackActionSuccessBlock)successBlock
-              failureBlock:(SBRCallbackActionFailureBlock)failureBlock;
+- (void)registerCallbacksWithParser:(SBRCallbackParser *)parser
+                       successBlock:(SBRCallbackActionSuccessBlock)successBlock
+                       failureBlock:(SBRCallbackActionFailureBlock)failureBlock;
 
-- (void)registerWithParser:(SBRCallbackParser *)parser
-              successBlock:(SBRCallbackActionSuccessBlock)successBlock
-              failureBlock:(SBRCallbackActionFailureBlock)failureBlock
-               cancelBlock:(SBRCallbackActionCancelBlock)cancelBlock;
+- (void)registerCallbacksWithParser:(SBRCallbackParser *)parser
+                       successBlock:(SBRCallbackActionSuccessBlock)successBlock
+                       failureBlock:(SBRCallbackActionFailureBlock)failureBlock
+                        cancelBlock:(SBRCallbackActionCancelBlock)cancelBlock;
 
 @end

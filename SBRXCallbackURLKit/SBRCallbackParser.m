@@ -55,7 +55,9 @@
     NSString *actionName = key;
     SBRCallbackActionHandler *action = obj;
     
-    NSString *actionDescription = [NSString stringWithFormat:@"%@ = %@://x-callback-url/%@", actionName, self.URLScheme, action.actionName];
+    NSString *callback = [[self callbackURLForActionHandler:action] absoluteString];
+    NSString *actionDescription = [NSString stringWithFormat:@"%@ = %@", actionName, callback];
+    
     [actionDescriptions addObject:actionDescription];
   }];
   

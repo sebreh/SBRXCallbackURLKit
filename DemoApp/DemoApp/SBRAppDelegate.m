@@ -25,8 +25,12 @@
   [[SBRCallbackParser sharedParser] setURLScheme:@"demoapp"];
   
   SBRCallbackAction *action = [SBRCallbackAction actionWithURLScheme:@"otherapp" name:@"drawSomething"];
-  [action registerWithParser:[SBRCallbackParser sharedParser] successBlock:^(NSDictionary *parameters) {
-    NSLog(@"Finished drawing");
+  [action registerCallbacksWithParser:[SBRCallbackParser sharedParser] successBlock:^(NSDictionary *parameters) {
+    // Finished drawing
+  } failureBlock:^(NSError *error) {
+    // Action failed in other app
+  } cancelBlock:^{
+    // Action cancelled in other app
   }];
   
   [action trigger];

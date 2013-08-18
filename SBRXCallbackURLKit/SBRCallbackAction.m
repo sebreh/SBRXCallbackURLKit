@@ -61,17 +61,17 @@
   return [[UIApplication sharedApplication] openURL:[self actionURL]];
 }
 
-- (void)registerWithParser:(SBRCallbackParser *)parser successBlock:(SBRCallbackActionSuccessBlock)successBlock {
-  return [self registerWithParser:parser successBlock:successBlock failureBlock:nil];
+- (void)registerCallbacksWithParser:(SBRCallbackParser *)parser successBlock:(SBRCallbackActionSuccessBlock)successBlock {
+  return [self registerCallbacksWithParser:parser successBlock:successBlock failureBlock:nil];
 }
 
-- (void)registerWithParser:(SBRCallbackParser *)parser
+- (void)registerCallbacksWithParser:(SBRCallbackParser *)parser
           successBlock:(SBRCallbackActionSuccessBlock)successBlock
           failureBlock:(SBRCallbackActionFailureBlock)failureBlock {
-  return [self registerWithParser:parser successBlock:successBlock failureBlock:failureBlock cancelBlock:nil];
+  return [self registerCallbacksWithParser:parser successBlock:successBlock failureBlock:failureBlock cancelBlock:nil];
 }
 
-- (void)registerWithParser:(SBRCallbackParser *)parser
+- (void)registerCallbacksWithParser:(SBRCallbackParser *)parser
           successBlock:(SBRCallbackActionSuccessBlock)successBlock
           failureBlock:(SBRCallbackActionFailureBlock)failureBlock
            cancelBlock:(SBRCallbackActionCancelBlock)cancelBlock {

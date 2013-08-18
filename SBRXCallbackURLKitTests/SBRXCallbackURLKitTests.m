@@ -166,10 +166,10 @@ static NSString * const kURLScheme = @"demoapp";
   SBRCallbackAction *action = [SBRCallbackAction actionWithURLScheme:@"otherapp" name:@"drawSomething"];
   SBRCallbackParser *parser = [SBRCallbackParser parserWithURLScheme:kURLScheme];
   
-  [action registerWithParser:parser
-                successBlock:^(NSDictionary *parameters) {}
-                failureBlock:^(NSError *error) {}
-                 cancelBlock:^{}];
+  [action registerCallbacksWithParser:parser
+                         successBlock:^(NSDictionary *parameters) {}
+                         failureBlock:^(NSError *error) {}
+                          cancelBlock:^{}];
   
   STAssertTrue([[action.parameters allKeys] containsObject:@"x-success"], @"Action should have x-success parameter.");  
   STAssertTrue([[action.parameters allKeys] containsObject:@"x-error"], @"Action should have x-error parameter.");
