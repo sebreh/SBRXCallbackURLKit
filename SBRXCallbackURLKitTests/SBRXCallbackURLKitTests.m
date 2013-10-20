@@ -9,6 +9,7 @@
 #import "SBRCallbackAction.h"
 #import "SBRCallbackParser.h"
 #import "SBRCallbackParserMockDelegate.h"
+#import "NSURL+SBRXCallbackURL.h"
 
 static NSString * const kURLScheme = @"demoapp";
 
@@ -219,6 +220,14 @@ static NSString * const kURLScheme = @"demoapp";
   
   STAssertTrue(called == shouldBeCalled, (shouldBeCalled ? @"Handler block was not called." : @"Handler block was called when it shouldn't."));
   STAssertTrue(handled == shouldBeCalled, (shouldBeCalled ? @"URL was not handled." : @"URL was handled when it shouldn't."));
+}
+
+#pragma mark - NSURL+SBRXCallbackURL
+
+- (void)test_sbr_queryParameters_url_params {
+    NSURL *testURL = [NSURL URLWithString:@"linkly://x-callback-url/clipURL?url=123&x-source=Safari&x-success=http://wiki.akosma.com&x-error=http://google.com?q=Test"];
+    NSDictionary *queryParams = [testURL sbr_queryParameters];
+    STAssertTrue([queryParams count] == 4, @"Expected 4 query params");
 }
 
 @end

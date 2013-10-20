@@ -18,7 +18,7 @@
   [chunks enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
     NSArray *parts = [obj componentsSeparatedByString:@"="];
     
-    if ([parts count] == 2) {
+    if ([parts count] >= 2) {
       NSString *name = parts[0];
       NSString *value = parts[1];
       parameters[name] = [value sbr_URLDecode];
