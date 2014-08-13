@@ -235,7 +235,7 @@
   NSString *callback = xParameters[@"x-error"];
   
   if ([callback length] > 0) {
-    NSDictionary *parameters = @{@"errorCode": [NSString stringWithFormat:@"%d", code],
+    NSDictionary *parameters = @{@"errorCode": [NSString stringWithFormat:@"%lu", code],
                                  @"errorMessage": message};
     [self callSourceCallbackURLString:callback parameters:parameters];
   }
