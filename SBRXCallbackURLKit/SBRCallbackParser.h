@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "SBRCallbackActionHandler.h"
 
-typedef NS_ENUM(NSUInteger, SBRCallbackParserError) {
+typedef NS_ENUM(NSInteger, SBRCallbackParserError) {
   SBRCallbackParserErrorMissingParameter = 1,
 };
 
