@@ -92,7 +92,7 @@
     NSString *errorAction = [NSString stringWithFormat:@"%@-%@-error", self.URLScheme, self.name];
     
     SBRCallbackActionHandler *handler = [parser addHandlerForActionName:errorAction handlerBlock:^BOOL(NSDictionary *parameters, NSString *source, SBRCallbackActionHandlerCompletionBlock completion) {
-      NSUInteger code = [parameters[@"errorCode"] integerValue];
+      NSInteger code = [parameters[@"errorCode"] integerValue];
       NSString *message = parameters[@"errorMessage"];
       NSError *error = [NSError sbr_errorWithCode:code message:message];
       

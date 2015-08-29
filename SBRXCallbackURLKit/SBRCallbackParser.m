@@ -226,7 +226,7 @@
   [self callErrorCallbackInXParameters:xParameters code:error.code message:[error localizedDescription]];
 }
 
-- (void)callErrorCallbackInXParameters:(NSDictionary *)xParameters code:(NSUInteger)code message:(NSString *)message {
+- (void)callErrorCallbackInXParameters:(NSDictionary *)xParameters code:(NSInteger)code message:(NSString *)message {
   // x-error:
   // URL to open if the requested action generates an error in the target app. This URL
   // will be open with at least the parameters “errorCode=code&errorMessage=message. If x-error
