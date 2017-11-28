@@ -214,7 +214,13 @@
 
 - (void)performCallbacksInXParameters:(NSDictionary *)xParameters successParameters:(NSDictionary *)successParameters error:(NSError *)error cancelled:(BOOL)cancelled {
   if (error) {
-    [self callErrorCallbackInXParameters:xParameters error:error];
+    //Oggerschummer begin
+    if (!successParameters){
+      [self callErrorCallbackInXParameters:xParameters error:error];
+    }else{
+      [self callErrorCallbackInXParameters:xParameters successParameters:successParameters];
+    }
+    //Oggerschummer end
   } else if (cancelled) {
     [self callCancelledCallbackInXParameters:xParameters];
   } else {
@@ -235,9 +241,23 @@
   NSString *callback = xParameters[@"x-error"];
   
   if ([callback length] > 0) {
-    NSDictionary *parameters = @{@"errorCode": [NSString stringWithFormat:@"%lu", code],
+    NSDictionary *parameters = @{@"errorCode": [NSString stringWithFormat:@"%d", code],
                                  @"errorMessage": message};
     [self callSourceCallbackURLString:callback parameters:parameters];
+  }
+}
+- (void)callErrorCallbackInXParameters:(NSDictionary *)xParameters successParameters:(NSDictionary *)successParameters {
+    // x-error:
+    // If the action in the target method is intended to return a result to the source
+    // app, the x-callback parameter should be included and provide a URL to open to return to
+    // the source app. On completion of the action, the target app will open this URL, possibly
+    // with additional parameters tacked on to return a result to the source app. If x-success
+    // is not provided, it is assumed that the user will stay in the target app on successful
+    // completion of the action.
+  NSString *callback = xParameters[@"x-error"];
+
+  if ([callback length] > 0) {
+    [self callSourceCallbackURLString:callback parameters:successParameters];
   }
 }
 
