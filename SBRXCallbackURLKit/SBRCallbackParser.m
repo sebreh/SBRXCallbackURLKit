@@ -222,7 +222,14 @@
     }
     //Oggerschummer end
   } else if (cancelled) {
-    [self callCancelledCallbackInXParameters:xParameters];
+    //Oggerschummer begin
+//    [self callCancelledCallbackInXParameters:xParameters];
+    if (!successParameters){
+      [self callCancelledCallbackInXParameters:xParameters];
+    }else{
+      [self callCancelledCallbackInXParameters:xParameters successParameters:successParameters];
+    }
+      //Oggerschummer end
   } else {
     [self callSuccessCallbackInXParameters:xParameters successParameters:successParameters];
   }
@@ -241,7 +248,7 @@
   NSString *callback = xParameters[@"x-error"];
   
   if ([callback length] > 0) {
-    NSDictionary *parameters = @{@"errorCode": [NSString stringWithFormat:@"%d", code],
+    NSDictionary *parameters = @{@"errorCode": [NSString stringWithFormat:@"%lu", (unsigned long)code],
                                  @"errorMessage": message};
     [self callSourceCallbackURLString:callback parameters:parameters];
   }
@@ -289,6 +296,23 @@
   }
 }
 
+- (void)callCancelledCallbackInXParameters:(NSDictionary *)xParameters successParameters:(NSDictionary *)successParameters {
+    // x-cancel:
+    // URL to open if the requested action is cancelled by the user. In the case
+    // where the target app offer the user the option to “cancel” the requested action, without
+    // a success or error result, this the the URL that should be opened to return the user to
+    // the source app.
+  NSString *callback = xParameters[@"x-cancel"];
+  //Trim leading spaces
+  NSRange range = [callback rangeOfString:@"^\\s*" options:NSRegularExpressionSearch];
+  NSString *result = [callback stringByReplacingCharactersInRange:range withString:@""];
+  callback = result;
+  if ([callback length] > 0) {
+    [self callSourceCallbackURLString:callback parameters:successParameters];
+  }
+}
+
+
 - (void)callSourceCallbackURLString:(NSString *)URLString parameters:(NSDictionary *)parameters {
   if ([self.delegate respondsToSelector:@selector(xCallbackURLParser:shouldOpenSourceCallbackURL:)]) {
     NSURL *url = [self callbackURLFromOriginalURLString:URLString parameters:parameters];
@@ -313,8 +337,8 @@
     
     urlString = [NSString stringWithFormat:@"%@%@%@", originalURLString, prefix, queryString];
   }
-  
-  return [NSURL URLWithString:urlString];
+  NSURL *resultURL =[NSURL URLWithString:urlString];
+  return resultURL;
 }
 
 @end
