@@ -130,7 +130,12 @@
   NSArray *missingParameters = [self missingParametersInUserParameters:userParameters requiredParameters:handler.requiredParameters];
   if ([missingParameters count] > 0) {
     NSString *message = [NSString stringWithFormat:@"Missing parameters %@", [missingParameters componentsJoinedByString:@"m"]];
-    [self callErrorCallbackInXParameters:xParameters code:SBRCallbackParserErrorMissingParameter message:message];
+    if ([self.delegate respondsToSelector:@selector(xCallbackURLParser:missingRequiredParameters:inURL:)]) {
+      [self.delegate xCallbackURLParser:self missingRequiredParameters:missingParameters inURL:URL];
+      [self callErrorCallbackInXParameters:xParameters code:SBRCallbackParserErrorMissingParameter message:message];
+    }else{
+      [self callErrorCallbackInXParameters:xParameters code:SBRCallbackParserErrorMissingParameter message:message];
+    }
     return NO;
   }
   
@@ -214,9 +219,22 @@
 
 - (void)performCallbacksInXParameters:(NSDictionary *)xParameters successParameters:(NSDictionary *)successParameters error:(NSError *)error cancelled:(BOOL)cancelled {
   if (error) {
-    [self callErrorCallbackInXParameters:xParameters error:error];
+    //Oggerschummer begin
+    if (!successParameters){
+      [self callErrorCallbackInXParameters:xParameters error:error];
+    }else{
+      [self callErrorCallbackInXParameters:xParameters successParameters:successParameters];
+    }
+    //Oggerschummer end
   } else if (cancelled) {
-    [self callCancelledCallbackInXParameters:xParameters];
+    //Oggerschummer begin
+//    [self callCancelledCallbackInXParameters:xParameters];
+    if (!successParameters){
+      [self callCancelledCallbackInXParameters:xParameters];
+    }else{
+      [self callCancelledCallbackInXParameters:xParameters successParameters:successParameters];
+    }
+      //Oggerschummer end
   } else {
     [self callSuccessCallbackInXParameters:xParameters successParameters:successParameters];
   }
@@ -235,9 +253,23 @@
   NSString *callback = xParameters[@"x-error"];
   
   if ([callback length] > 0) {
-    NSDictionary *parameters = @{@"errorCode": [NSString stringWithFormat:@"%lu", code],
+    NSDictionary *parameters = @{@"errorCode": [NSString stringWithFormat:@"%lu", (unsigned long)code],
                                  @"errorMessage": message};
     [self callSourceCallbackURLString:callback parameters:parameters];
+  }
+}
+- (void)callErrorCallbackInXParameters:(NSDictionary *)xParameters successParameters:(NSDictionary *)successParameters {
+    // x-error:
+    // If the action in the target method is intended to return a result to the source
+    // app, the x-callback parameter should be included and provide a URL to open to return to
+    // the source app. On completion of the action, the target app will open this URL, possibly
+    // with additional parameters tacked on to return a result to the source app. If x-success
+    // is not provided, it is assumed that the user will stay in the target app on successful
+    // completion of the action.
+  NSString *callback = xParameters[@"x-error"];
+
+  if ([callback length] > 0) {
+    [self callSourceCallbackURLString:callback parameters:successParameters];
   }
 }
 
@@ -269,6 +301,23 @@
   }
 }
 
+- (void)callCancelledCallbackInXParameters:(NSDictionary *)xParameters successParameters:(NSDictionary *)successParameters {
+    // x-cancel:
+    // URL to open if the requested action is cancelled by the user. In the case
+    // where the target app offer the user the option to “cancel” the requested action, without
+    // a success or error result, this the the URL that should be opened to return the user to
+    // the source app.
+  NSString *callback = xParameters[@"x-cancel"];
+  //Trim leading spaces
+  NSRange range = [callback rangeOfString:@"^\\s*" options:NSRegularExpressionSearch];
+  NSString *result = [callback stringByReplacingCharactersInRange:range withString:@""];
+  callback = result;
+  if ([callback length] > 0) {
+    [self callSourceCallbackURLString:callback parameters:successParameters];
+  }
+}
+
+
 - (void)callSourceCallbackURLString:(NSString *)URLString parameters:(NSDictionary *)parameters {
   if ([self.delegate respondsToSelector:@selector(xCallbackURLParser:shouldOpenSourceCallbackURL:)]) {
     NSURL *url = [self callbackURLFromOriginalURLString:URLString parameters:parameters];
@@ -293,8 +342,8 @@
     
     urlString = [NSString stringWithFormat:@"%@%@%@", originalURLString, prefix, queryString];
   }
-  
-  return [NSURL URLWithString:urlString];
+  NSURL *resultURL =[NSURL URLWithString:urlString];
+  return resultURL;
 }
 
 @end
