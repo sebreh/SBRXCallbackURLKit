@@ -40,5 +40,5 @@ typedef NS_ENUM(NSUInteger, SBRCallbackParserError) {
 @optional
 
 - (void)xCallbackURLParser:(SBRCallbackParser *)parser shouldOpenSourceCallbackURL:(NSURL *)callbackURL;
-
+- (void)xCallbackURLParser:(SBRCallbackParser *)parser missingRequiredParameters:(NSArray *) missingParameters inURL:(NSURL *)URL;
 @end

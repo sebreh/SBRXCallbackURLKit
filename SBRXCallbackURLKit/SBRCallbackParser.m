@@ -130,7 +130,12 @@
   NSArray *missingParameters = [self missingParametersInUserParameters:userParameters requiredParameters:handler.requiredParameters];
   if ([missingParameters count] > 0) {
     NSString *message = [NSString stringWithFormat:@"Missing parameters %@", [missingParameters componentsJoinedByString:@"m"]];
-    [self callErrorCallbackInXParameters:xParameters code:SBRCallbackParserErrorMissingParameter message:message];
+    if ([self.delegate respondsToSelector:@selector(xCallbackURLParser:missingRequiredParameters:inURL:)]) {
+      [self.delegate xCallbackURLParser:self missingRequiredParameters:missingParameters inURL:URL];
+      [self callErrorCallbackInXParameters:xParameters code:SBRCallbackParserErrorMissingParameter message:message];
+    }else{
+      [self callErrorCallbackInXParameters:xParameters code:SBRCallbackParserErrorMissingParameter message:message];
+    }
     return NO;
   }
   
